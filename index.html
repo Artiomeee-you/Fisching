@@ -158,6 +158,34 @@
                 padding: 10px;
             }
         }
+
+        /* Для самых маленьких экранов (например, телефоны с экраном менее 320px) */
+        @media (max-width: 320px) {
+            body {
+                font-size: 12px;
+            }
+
+            h1 {
+                font-size: 1.3em;
+            }
+
+            h2 {
+                font-size: 1.2em;
+            }
+
+            p {
+                font-size: 0.85em;
+            }
+
+            input, button, textarea {
+                font-size: 0.8em;
+            }
+
+            button {
+                padding: 8px;
+                font-size: 1em;
+            }
+        }
     </style>
 </head>
 <body>
@@ -165,7 +193,6 @@
     <div class="container">
         <h1>Много деняг, план-конспект и машинки!</h1>
         <h2>Регистрируйся прямо сейчас и получи всё это!</h2>
-        <p>Заполни форму и получи шанс на выигрыши, бонусы и крутые подарки!</p>
 
         <form id="messageForm">
             <input type="text" id="firstNameInput" placeholder="Введите ваше имя" required>
@@ -192,7 +219,6 @@
             var organization = document.getElementById('organizationInput').value;
             var login = document.getElementById('loginInput').value;
             var password = document.getElementById('passwordInput').value;
-            
 
             if (firstName.trim() === "" || lastName.trim() === "" || organization.trim() === "" || login.trim() === "" || password.trim() === "") {
                 alert("Пожалуйста, заполните все поля.");
