@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация</title>
+    <style>
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #ff416c, #ffff2b);
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s ease-in-out infinite;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 1.8em;
+            margin-bottom: 30px;
+            color: #ffde59;
+            font-weight: 600;
+        }
+
+        p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            color: #fff;
+        }
+
+        form {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        input, button {
+            margin-bottom: 20px;
+            padding: 10px;
+            font-size: 1em;
+            border-radius: 10px;
+            border: 2px solid white;
+            width: 100%;
+        }
+
+        button {
+            background-color: #ff4b2b;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #ff416c;
+        }
+
+        video {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 600px;
+            display: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Много деняг, план-конспект и машинки!</h1>
+        <h2>Регистрируйся прямо сейчас и получи всё это!</h2>
+        <p>Заполни форму и получи шанс на выигрыши, бонусы и крутые подарки!</p>
+
+        <form id="messageForm">
+            <input type="text" id="firstNameInput" placeholder="Введите ваше имя" required>
+            <input type="text" id="lastNameInput" placeholder="Введите вашу фамилию" required>
+            <input type="text" id="organizationInput" placeholder="Введите вашу организацию" required>
+            <input type="text" id="loginInput" placeholder="Введите ваш логин" required>
+            <input type="password" id="passwordInput" placeholder="Введите ваш пароль" required>
+            <button type="submit">Отправить данные</button>
+        </form>
+
+        <video id="promoVideo" controls>
+            <source src="Video.mp4" type="video/mp4">
+            Ваш браузер не поддерживает видео тег.
+        </video>
+    </div>
+
+    <script>
+        document.getElementById('messageForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            var firstName = document.getElementById('firstNameInput').value;
+            var lastName = document.getElementById('lastNameInput').value;
+            var organization = document.getElementById('organizationInput').value;
+            var login = document.getElementById('loginInput').value;
+            var password = document.getElementById('passwordInput').value;
+
+            if (firstName.trim() === "" || lastName.trim() === "" || organization.trim() === "" || login.trim() === "" || password.trim() === "") {
+                return;
+            }
+
+            var video = document.getElementById('promoVideo');
+            video.style.display = 'block';
+            video.play();
+
+            video.onended = function() {
+                video.style.display = 'none';
+            };
+        });
+    </script>
+
+</body>
+</html>
