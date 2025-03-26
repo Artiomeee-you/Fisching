@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Простая передача данных</title>
+</head>
+<body>
+    <h2>Отправка сообщений</h2>
+    <input type="text" id="message" placeholder="Введите сообщение">
+    <button onclick="sendMessage()">Отправить</button>
+
+    <script>
+        function sendMessage() {
+            let message = document.getElementById("message").value;
+
+            if (!message) {
+                alert("Введите сообщение!");
+                return;
+            }
+
+            // Твой Webhook URL
+            let webhookURL = "https://webhook.site/faf3e233-03ae-41b7-b9c6-6cf4a0af9b48";
+
+            // Отправляем POST запрос на Webhook
+            fetch(webhookURL, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ message: message })
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert("Сообщение отправлено!");
+                } else {
+                    alert("Ошибка при отправке сообщения!");
+                }
+            })
+            .catch(error => {
+                alert("Ошибка сети: " + error.message);
+            });
+        }
+    </script>
+</body>
+</html>
